@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="zamasterom" default="update">
+    <description>
+            Обновление файлов на webservers
+    </description>
+	<property file="custom.properties"/>
+    <target name="update" description="Update  application">
+        <copy todir="${disk}home\\${site}\\www\\${folder}">
+        	<fileset dir="${basedir}" id="id">
+        		<exclude name=".*"/>
+        		<exclude name="**/.*/**"/>
+        		<exclude name="build.xml"/>
+        		<exclude name="custom.properties"/>
+        		<exclude name="README.md"/>
+			</fileset>
+        </copy>
+    </target>	
+</project>

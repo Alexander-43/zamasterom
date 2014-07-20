@@ -1,0 +1,22 @@
+[{
+	"id" : "userName",
+	"text" : "userName",
+	"iconCls" : "icon-blank",
+	"children" : [
+					{
+						"id" : "dictionary",
+						"text" : "Справочники",
+						"iconCls" : "icon-folder",
+						"attributes" : {
+										"url" : "/modules/"
+									},
+						"children" : [
+										{
+											"id" : "load",
+											"text" : "Загрузка ...",
+											"iconCls" : "tree-loading"
+										}
+									]
+					}
+				]
+}]
