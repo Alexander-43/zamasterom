@@ -4,9 +4,11 @@ function loadTree (treeId){
 		    url:'/configs/initialTree.json'
 		});
 		$('#'+treeId).tree({
-			onBeforeExpand : function(node){
-				alert(node.text);
-			}
+			onBeforeExpand : onBeforeExpand
 		});
 	});
+}
+
+function onBeforeExpand(node){
+	alert(node.text);
 }
