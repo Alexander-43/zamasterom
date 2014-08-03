@@ -8,14 +8,15 @@
 		<script type="text/javascript" src="js/plugins/jquery.panel.js"></script>
 		<script type="text/javascript" src="js/plugins/jquery.tree.js"></script>
 		<script type="text/javascript" src="js/west-tree-loader.js"></script>
+		<script type="text/javascript" src="js/center-loader.js"></script>
 	</head>
 	<body>
-		<div id="cc" class="easyui-layout" data-options="fit:true">			
+		<div id="main_page_layout" class="easyui-layout" data-options="fit:true">			
 			<div data-options="region:'center'" style="padding:5px;background:#eee;"></div>
 		</div>
 		<script>
-			$('#cc').layout();
-			$('#cc').layout('add',{
+			$('#main_page_layout').layout();
+			$('#main_page_layout').layout('add',{
 				region: 'west',
 				width: 180,
 				title: 'Список объектов',

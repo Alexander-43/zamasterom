@@ -5,7 +5,7 @@
     </description>
 	<property file="custom.properties"/>
     <target name="update" description="Update  application">
-        <copy todir="${disk}home\\${site}\\www\\${folder}">
+        <copy todir="${disk}home\\${site}\\www\\${folder}" granularity="20">
         	<fileset dir="${basedir}" id="id">
         		<exclude name=".*"/>
         		<exclude name="**/.*/**"/>
