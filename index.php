@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="js/plugins/jquery.tree.js"></script>
 		<script type="text/javascript" src="js/west-tree-loader.js"></script>
 		<script type="text/javascript" src="js/center-loader.js"></script>
+		<script type="text/javascript" src="js/dictionary/dicTableObject.js"></script>
 	</head>
 	<body>
 		<div id="main_page_layout" class="easyui-layout" data-options="fit:true">			

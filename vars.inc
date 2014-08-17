@@ -7,4 +7,5 @@
 	}
 	define(configsFolder, rootSite.slash."configs");
 	define(iniFileConfig, configsFolder.slash."config.ini");
+	
 ?>
