@@ -58,6 +58,10 @@
 			case "create" : $res = $mysqlObj->create($params['data'], $params['key']);
 				break;
 			case "update" : $res = $mysqlObj->update2($params['data'], $params['key']);
+				break;
+			case "delete" : $res = $mysqlObj->delete2($params['data'], $params['key']);
+				break;
+			default : $res = $mysqlObj->makeResult(500, 'Not implemented');
 		}
 		printASJson($res);
 	}

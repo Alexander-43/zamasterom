@@ -59,10 +59,20 @@ var dicTableObject = {
             dicTableObject.btns[obj.id]();
 	     },
 	     deleteRow : function deleteRow(obj){
-	    	 dicTableObject.tableGrid.datagrid('cancelEdit', this.editIndex)
-             	.datagrid('deleteRow', this.editIndex);
-	    	 dicTableObject.editIndex = undefined;
-	    	 dicTableObject.btns[obj.id]();
+	    	 if (dicTableObject.editIndex !== undefined){
+		    	 var key = this.tableGrid.datagrid('options')['idField'];
+		    	 var data = this.tableGrid.datagrid('getRows')[this.editIndex];
+		    	 var me = this;
+		    	 var successCallBack = function(data){
+		    		 if (data.status == 200){
+			    		 dicTableObject.tableGrid.datagrid('cancelEdit', me.editIndex)
+			             	.datagrid('deleteRow', me.editIndex);
+				    	 dicTableObject.editIndex = undefined;
+				    	 dicTableObject.btns[obj.id]();
+		    		 }
+		    	 }
+		    	 this.postDictAction(key, data, 'delete', this, successCallBack);
+	    	 }
 	     },
 	     saveRow : function saveRow(obj){
 	    	 if (dicTableObject.editIndex !== undefined){
@@ -70,23 +80,10 @@ var dicTableObject = {
 	    			 this.tableGrid.datagrid('endEdit', this.editIndex);
 	    			 dicTableObject.btns[obj.id]();
 	    			 var key = this.tableGrid.datagrid('options')['idField'];
-	    			 var data = this.tableGrid.datagrid('getRows')[this.editIndex]
+	    			 var data = this.tableGrid.datagrid('getRows')[this.editIndex];
 	    			 var action = data[key] ? "update" : "create" ;
 	    			 var me = this;
-	    			 $.post("ajax_request.php", {
-	    				 "data":data,
-	    				 "table":me.object,
-	    				 "action":action,
-	    				 "key":key,
-	    				 "fn":"Ajax_postDictItem"
-	    				 }, function (data){
-	    					 $.messager.show({
-	    			                title:'Сообщение',
-	    			                msg:data.message,
-	    			                showType:'show'
-	    			            });
-	    					 me.tableGrid.datagrid('reload');
-	    				 });
+	    			 this.postDictAction(key, data, action, me);
 	    		 } else {
 	    			 $.messager.alert('Внимание', 'Не все поля заполнены', 'warning');
 	    		 }
@@ -120,48 +117,66 @@ var dicTableObject = {
 			 }
 	     },
 	     getColumnDefs: function getColumnDefs(){
-	    		var node = $('#west_tree_id').tree('getSelected');
-	    		if (node){
-	    			var columns = [];
-	    			for (var i in node.attributes.tableColumns){
-	    				var column = node.attributes.tableColumns;
-	    				var col = {field:column[i].Field, title:column[i].Comment, resizable:true};
-	    				if (column[i].Field != 'id'){
-	    					col['editor'] = {type:'validatebox',
-	    									options:{
-	    										required:true, 
-	    										validType:'minLength[1]',
-	    										missingMessage:'Поле <b><i>'+col.title+'</i></b><br>не может быть пустым',
-	    										tipPosition:'left'}
-	    									};
-	    					col['width'] = 50;
-	    				} else {
-	    					col['fixed'] = true;
-	    					col['resizable'] = false;
-	    					col['width'] = 30;
-	    					col['hidden'] = true;
-	    				}
-	    				columns[columns.length] = col;
-	    			}
-	    			return columns;
-	    		}
-	    		return [];
-	    	},
-	     	createTable:function createTable(id, cols){
-	    		var node = $('#west_tree_id').tree('getSelected');
-	    		$('#'+id).datagrid({ 
-	    		    title:node.text,
-	    		    fit:true,
-	    			fitColumns:true,
-	    			border:false,
-	    			columns:[cols]
-	    		});
-	    	},
-	    	enDisBtns : function (btns, action){
-	    		for(var i in btns){
-	    			$('#'+btns[i]).linkbutton(action);
-	    		}
+    		var node = $('#west_tree_id').tree('getSelected');
+    		if (node){
+    			var columns = [];
+    			for (var i in node.attributes.tableColumns){
+    				var column = node.attributes.tableColumns;
+    				var col = {field:column[i].Field, title:column[i].Comment, resizable:true};
+    				if (column[i].Field != 'id'){
+    					col['editor'] = {type:'validatebox',
+    									options:{
+    										required:true, 
+    										validType:'minLength[1]',
+    										missingMessage:'Поле <b><i>'+col.title+'</i></b><br>не может быть пустым',
+    										tipPosition:'left'}
+    									};
+    					col['width'] = 50;
+    				} else {
+    					col['fixed'] = true;
+    					col['resizable'] = false;
+    					col['width'] = 30;
+    					col['hidden'] = true;
+    				}
+    				columns[columns.length] = col;
+    			}
+    			return columns;
+    		}
+    		return [];
+    	},
+     	createTable:function createTable(id, cols){
+    		var node = $('#west_tree_id').tree('getSelected');
+    		$('#'+id).datagrid({ 
+    		    title:node.text,
+    		    fit:true,
+    			fitColumns:true,
+    			border:false,
+    			columns:[cols]
+    		});
+    	},
+    	enDisBtns : function (btns, action){
+    		for(var i in btns){
+    			$('#'+btns[i]).linkbutton(action);
+    		}
+    	},
+	    postDictAction : function (key, data, action, me, successCallBack){
+	    	if (!successCallBack){
+	    		successCallBack = function (){};
 	    	}
-	    	
-		 
+	    	$.post("ajax_request.php", {
+				 "data":data,
+				 "table":me.object,
+				 "action":action,
+				 "key":key,
+				 "fn":"Ajax_postDictItem"
+				 }, function (data){
+					 $.messager.show({
+			                title:'Сообщение',
+			                msg:data.message,
+			                showType:'show'
+			            });
+					 me.tableGrid.datagrid('reload');
+					 status = data.status;
+				 }).always(successCallBack);
+	    }
 }
