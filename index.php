@@ -7,6 +7,8 @@
 		<script type="text/javascript" src="js/plugins/jquery.layout.js"></script>
 		<script type="text/javascript" src="js/plugins/jquery.panel.js"></script>
 		<script type="text/javascript" src="js/plugins/jquery.tree.js"></script>
+		<script type="text/javascript" src="js/plugins/jquery.window.js"></script>
+		<script type="text/javascript" src="js/plugins/jquery.textbox.js"></script>
 		<script type="text/javascript" src="js/west-tree-loader.js"></script>
 		<script type="text/javascript" src="js/center-loader.js"></script>
 		<script type="text/javascript" src="js/dictionary/dicTableObject.js"></script>
@@ -14,6 +16,10 @@
 	<body>
 		<div id="main_page_layout" class="easyui-layout" data-options="fit:true">			
 			<div data-options="region:'center'" style="padding:5px;background:#eee;"></div>
+		</div>
+		<div id="west-tools">
+			<a href="#" class="icon-login" onclick="javascript:login()" title="Войти"></a>
+			<a href="#" class="icon-logout" onclick="javascript:alert('logout')" title="Выйти"></a>
 		</div>
 		<script>
 			$('#main_page_layout').layout();
@@ -23,10 +29,7 @@
 				title: 'Список объектов',
 				split: true,
 				href:'west.php',
-				tools: [{
-					iconCls:'icon-reload',
-					handler:function(){alert(this);}
-				}]
+				tools: '#west-tools'
 			});
 			//$('#cc').layout('panel','west').panel('setTitle','dgdfgd');
 		</script>
