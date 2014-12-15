@@ -39,24 +39,6 @@ function onBeforeExpand(node){
 	//alert(node.text);
 }
 
-function login(){
-	if ($('#wnd-login').length == 0){
-		$('body').append('<div id="wnd-login"></div>');
-	}
-	$('#wnd-login').window({
-			width:300,
-	    	height:200,
-	    	iconCls:'icon-login',
-	    	modal:true,
-	    	resizable:false,
-	    	maximizable:false,
-	    	minimizable:false,
-	    	collapsible:false,
-	    	title:' Войти'
-		});
-	$('#wnd-login').window('refresh', 'modules/page_login.php');
-}
-
 function loadFilter(data, parent){
 	for (var i in data){
 		if (data[i].id == 'userName'){

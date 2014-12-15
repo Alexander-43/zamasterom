@@ -11,6 +11,7 @@
 		<script type="text/javascript" src="js/plugins/jquery.textbox.js"></script>
 		<script type="text/javascript" src="js/west-tree-loader.js"></script>
 		<script type="text/javascript" src="js/center-loader.js"></script>
+		<script type="text/javascript" src="js/login.js"></script>
 		<script type="text/javascript" src="js/dictionary/dicTableObject.js"></script>
 	</head>
 	<body>
@@ -18,8 +19,8 @@
 			<div data-options="region:'center'" style="padding:5px;background:#eee;"></div>
 		</div>
 		<div id="west-tools">
-			<a href="#" class="icon-login" onclick="javascript:login()" title="Войти"></a>
-			<a href="#" class="icon-logout" onclick="javascript:alert('logout')" title="Выйти"></a>
+			<a href="#" class="icon-login" onclick="javascript:loginObject.login()" title="Войти"></a>
+			<a href="#" class="icon-logout" onclick="javascript:loginObject.logout()" title="Выйти"></a>
 		</div>
 		<script>
 			$('#main_page_layout').layout();
