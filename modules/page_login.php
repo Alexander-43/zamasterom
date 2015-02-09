@@ -8,7 +8,7 @@
 			</div>
 		</div>
 		<div data-options="region:'south',border:false" style="text-align:center;padding:5px 0 5px;">
-			<a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="javascript:alert('ok')" style="width:80px">Ок</a>
+			<a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="javascript:loginObject.doLogin('#username', '#password')" style="width:80px">Ок</a>
 			<a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:loginObject.close()" style="width:80px">Отмена</a>
 		</div>
 </div>

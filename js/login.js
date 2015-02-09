@@ -18,6 +18,11 @@ var loginObject = {
 			});
 		this.open();
 	},
+	doLogin : function(login, password){
+		var l = $(login) ? $(login).val():null;
+		var p = $(password) ? $(password).val():null;
+		
+	},
 	logout : function(){
 		alert('Выход');
 	},
