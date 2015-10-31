@@ -15,18 +15,7 @@
 <script>
 	$('#login-form').ready(
 		function (){
-			$('#username').textbox({
-			    iconCls:'icon-man',
-			    width:250,
-			    height:30,
-			    prompt:'Имя пользователя'
-			});
-			$('#password').textbox({
-			    iconCls:'icon-lock',
-			    width:250,
-			    height:30,
-			    prompt:'Пароль'
-			});
+			loginObject.init('#username', '#password');
 		}
 	);
 </script>
