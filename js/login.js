@@ -35,9 +35,16 @@ var loginObject = {
 	doLogin : function(login, password){
 		var l = $(login) ? $(login).val():null;
 		var p = $(password) ? $(password).val():null;
-		$.cookie('ticket', l+'_'+p, {path:'/', expires: 700});
-		$('#'+this.id).window('close');
-		this.refresh();
+		var me = this;
+		$.post("ajax_request.php", {
+			 "login":l,
+			 "password":p,
+			 "fn":"Ajax_postDologin"
+			 }, function (data){
+				$.cookie('ticket', l+'_'+p, {path:'/', expires: 700});
+				$('#'+me.id).window('close');
+				me.refresh();
+			 });
 	},
 	logout : function(){
 		alert('Выход');
@@ -48,7 +55,7 @@ var loginObject = {
 		$('#'+this.id).window('close');
 	},
 	open : function(){
-		$('#'+this.id).window('refresh', 'modules/page_login.php');
+		$('#'+this.id).window('refresh', 'pages/page_login.php');
 	},
 	refresh : function(){
 		if (!$.cookie('ticket')){

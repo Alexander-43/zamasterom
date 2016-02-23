@@ -65,4 +65,8 @@
 		}
 		printASJson($res);
 	}
+	
+	function Ajax_postDologin($params){
+		printASJson($params);	
+	}
 ?>
